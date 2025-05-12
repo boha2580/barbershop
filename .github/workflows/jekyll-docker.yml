@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m "رفع أول نسخة من موقع الحلاق"
+git branch -M main
+git remote add origin https://github.com/boha2580/barbershop.git
+git push -u origin main
