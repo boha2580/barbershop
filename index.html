@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد في صالون الحلاقة - Hemdan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>حجز موعد في صالون الحلاقة - Hemdan</h1>
+        <p>املأ بياناتك للحجز في صالون الحلاقة.</p>
+    </header>
+
+    <section class="booking-form">
+        <form id="bookingForm" action="https://formspree.io/f/xdkgwogj" method="POST" onsubmit="addDate()">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">رقم الهاتف:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <input type="hidden" id="booking_date" name="booking_date">
+
+            <button type="submit">إرسال الحجز</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>حقوق الطبع والنشر © 2025 صالون الحلاقة - Hemdan</p>
+    </footer>
+
+    <script>
+        function addDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('booking_date').value = today;
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const bookingKey = `booking_${name}_${phone}`;
+
+            if (localStorage.getItem(bookingKey)) {
+                event.preventDefault();
+                alert('لقد قمت بالحجز مسبقًا بنفس الاسم ورقم الهاتف!');
+            } else {
+                localStorage.setItem(bookingKey, 'true');
+            }
+        });
+    </script>
+</body>
+</html>
